@@ -1,6 +1,6 @@
 const Login = () => {
     return (
-        <div className="text-3xl">"Login"</div>
+        <div className="text-3xl">"Successfully setup"</div>
     )
 }
 
