@@ -1,33 +1,62 @@
 import { useState } from "react";
 import Header from "./Header";
 const Login = () => {
-  const [isSignIn ,setIsSignIn] = useState(false)
+  const [isSignIn, setIsSignIn] = useState(false);
 
   const toggleSignIn = () => {
-    setIsSignIn(!isSignIn)
-  }
+    setIsSignIn(!isSignIn);
+  };
 
   return (
     <div>
       <Header />
-      <img className="absolute"
+      <img
+        className="absolute"
         src="https://assets.nflxext.com/ffe/siteui/vlv3/ab180a27-b661-44d7-a6d9-940cb32f2f4a/7fb62e44-31fd-4e1f-b6ad-0b5c8c2a20ef/IN-en-20231009-popsignuptwoweeks-perspective_alpha_website_large.jpg"
         alt="netflix-background"
       ></img>
-      <form className='absolute flex flex-col gap-2 w-3/12 bg-black opacity-90 p-10 rounded-md my-44 mx-auto left-0 right-0'>
-        <div className='text-white text-3xl mb-2 font-bold'>
-         {isSignIn ?  "Sign In" :  "Sign Up"}
+      <form className="absolute flex flex-col gap-4 w-3/12 bg-black opacity-90 p-10 rounded-md my-44 mx-auto left-0 right-0">
+        <div className="text-white text-3xl mb-2 font-bold">
+          {isSignIn ? "Sign In" : "Sign Up"}
         </div>
-        <input className='px-4 py-2 rounded text-base bg-gray-800' type='text' placeholder='Email or phone number'></input>
-        <input className='px-4 py-2 rounded text-base bg-gray-800' type='password' placeholder='Password'></input>
-        <button className='bg-red-700 text-white text-base p-2 rounded mt-5' type='submit'>{isSignIn ? "Sign In" : "Sign Up"}</button>
-        <div className='flex justify-between text-white text-xs'>
+        {!isSignIn && (
+          <input
+            className="px-4 py-2 rounded text-base bg-gray-800"
+            type="text"
+            placeholder="Full Name"
+          ></input>
+        )}
+        <input
+          className="px-4 py-2 rounded text-base bg-gray-800"
+          type="text"
+          placeholder="Email or phone number"
+        ></input>
+        <input
+          className="px-4 py-2 rounded text-base bg-gray-800"
+          type="password"
+          placeholder="Password"
+        ></input>
+        <button
+          className="bg-red-700 text-white text-base p-2 rounded mt-5"
+          type="submit"
+        >
+          {isSignIn ? "Sign In" : "Sign Up"}
+        </button>
+        <div className="flex justify-between text-white text-xs">
           <div>Remember Me</div>
           <div>Need help?</div>
         </div>
         {/* <div> */}
-          <div className='text-gray-500 text-sm'>{isSignIn ? "New to netflix ?" : "Already a user ?"} <span className='text-white text-sm cursor-pointer' onClick={toggleSignIn}>{isSignIn ? "Sign up now" : "Sign in now"}</span></div>
-          {/* <div className='text-xs text-white'>This page is protected by Google reCAPTCHA to ensure you're not a bot.<span className='text-blue-950'>Learn more.</span></div> */}
+        <div className="text-gray-500 text-sm">
+          {isSignIn ? "New to netflix ?" : "Already a user ?"}{" "}
+          <span
+            className="text-white text-sm cursor-pointer"
+            onClick={toggleSignIn}
+          >
+            {isSignIn ? "Sign up now" : "Sign in now"}
+          </span>
+        </div>
+        {/* <div className='text-xs text-white'>This page is protected by Google reCAPTCHA to ensure you're not a bot.<span className='text-blue-950'>Learn more.</span></div> */}
         {/* </div> */}
       </form>
     </div>
