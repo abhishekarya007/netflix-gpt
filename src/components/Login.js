@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
+import handleValidate from "../utils/validate";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
 
   const toggleSignIn = () => {
     setIsSignIn(!isSignIn);
+  };
+
+  const handleOnValidate = () => {
+    console.log(
+      name.current.value,
+      email.current.value,
+      password.current.value
+    );
+    const message = handleValidate(email.current.value, password.current.value);
+    setMessage(message)
   };
 
   return (
@@ -15,29 +31,38 @@ const Login = () => {
         src="https://assets.nflxext.com/ffe/siteui/vlv3/ab180a27-b661-44d7-a6d9-940cb32f2f4a/7fb62e44-31fd-4e1f-b6ad-0b5c8c2a20ef/IN-en-20231009-popsignuptwoweeks-perspective_alpha_website_large.jpg"
         alt="netflix-background"
       ></img>
-      <form className="absolute flex flex-col gap-4 w-3/12 bg-black opacity-90 p-10 rounded-md my-44 mx-auto left-0 right-0">
+      <form
+        onSubmit={(ev) => ev.preventDefault()}
+        className="absolute flex flex-col gap-4 w-3/12 bg-black opacity-90 p-10 rounded-md my-44 mx-auto left-0 right-0"
+      >
         <div className="text-white text-3xl mb-2 font-bold">
           {isSignIn ? "Sign In" : "Sign Up"}
         </div>
         {!isSignIn && (
           <input
-            className="px-4 py-2 rounded text-base bg-gray-800"
+            ref={name}
+            className="px-4 py-2 rounded text-base bg-gray-800 text-white"
             type="text"
             placeholder="Full Name"
           ></input>
         )}
         <input
-          className="px-4 py-2 rounded text-base bg-gray-800"
+          ref={email}
+          className="px-4 py-2 rounded text-base bg-gray-800 text-white"
           type="text"
-          placeholder="Email or phone number"
+          placeholder="Email address"
         ></input>
         <input
-          className="px-4 py-2 rounded text-base bg-gray-800"
+          ref={password}
+          className="px-4 py-2 rounded text-base bg-gray-800 text-white"
           type="password"
           placeholder="Password"
         ></input>
+        <div className="text-red-700 text-xs font-bold">{message}</div>
+
         <button
-          className="bg-red-700 text-white text-base p-2 rounded mt-5"
+          className="bg-red-700 text-white text-base p-2 rounded"
+          onClick={handleOnValidate}
           type="submit"
         >
           {isSignIn ? "Sign In" : "Sign Up"}
