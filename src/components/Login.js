@@ -20,6 +20,7 @@ const Login = () => {
       password.current.value
     );
     const message = handleValidate(email.current.value, password.current.value);
+    console.log(message)
     setMessage(message)
   };
 
