@@ -1,6 +1,11 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import handleValidate from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(false);
   const [message, setMessage] = useState("");
@@ -14,14 +19,32 @@ const Login = () => {
   };
 
   const handleOnValidate = () => {
-    console.log(
-      name.current.value,
-      email.current.value,
-      password.current.value
-    );
     const message = handleValidate(email.current.value, password.current.value);
-    console.log(message)
-    setMessage(message)
+    setMessage(message);
+
+    if (message) return;
+
+    if (isSignIn) {
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          const user = userCredential.user;
+        })
+        .catch((error) => {
+          setMessage(error.message);
+        });
+    } else {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+        })
+        .catch((error) => {
+          setMessage(error.message);
+        });
+    }
   };
 
   return (
@@ -64,7 +87,6 @@ const Login = () => {
         <button
           className="bg-red-700 text-white text-base p-2 rounded"
           onClick={handleOnValidate}
-          type="submit"
         >
           {isSignIn ? "Sign In" : "Sign Up"}
         </button>
