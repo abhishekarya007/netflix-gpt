@@ -9,7 +9,6 @@ const handleValidate = (email, password) => {
       password
     );
 
-  console.log(password);
 
   if (!isEmailValid) {
     return "Email is not valid";

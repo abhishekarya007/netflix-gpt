@@ -6,9 +6,15 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(false);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const [userInfo, setUserInfo] = useState({});
 
   const name = useRef(null);
   const email = useRef(null);
@@ -25,9 +31,21 @@ const Login = () => {
     if (message) return;
 
     if (isSignIn) {
-      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
         .then((userCredential) => {
-          const user = userCredential.user;
+          const { uid, displayName, email } = userCredential.user;
+          dispatch(
+            addUser({
+              uid: uid,
+              displayName: displayName,
+              email: email,
+            })
+          );
+          navigate("/browse");
         })
         .catch((error) => {
           setMessage(error.message);
@@ -39,7 +57,16 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          const user = userCredential.user;
+          const { uid, displayName, email } = userCredential.user;
+          dispatch(
+            addUser({
+              uid: uid,
+              displayName: displayName,
+              email: email,
+            })
+          );
+
+          navigate("/browse");
         })
         .catch((error) => {
           setMessage(error.message);
