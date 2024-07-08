@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from "../utils/userSlice";
+import { addUser, removeUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Sign-out successful.");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, displayName, email } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            displayName: displayName,
+            email: email,
+          })
+        );
+        navigate("/browse");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+  }, []);
 
   return (
     <div className="flex justify-between absolute bg-gradient-to-b from-black px-8 py-2 z-20 w-screen items-center">
@@ -17,10 +47,7 @@ const Header = () => {
       ></img>
       {user && (
         <div
-          onClick={() => {
-            dispatch(removeUser());
-            navigate("/");
-          }}
+          onClick={handleSignOut}
           className="bg-red-600 h-fit text-white text-sm font-bold p-2 rounded-lg cursor-pointer"
         >
           Sign Out
