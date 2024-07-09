@@ -8,9 +8,7 @@ const SecondaryContainer = () => {
   return (
     <div className="bg-black">
       <div className="flex flex-col gap-10 text-white -mt-56 relative z-50 ml-10">
-        <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
-        <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
-        <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
+        <MovieList title="Popular" moviesList={movies?.popular} />
         <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
       </div>
     </div>

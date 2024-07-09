@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import VideosTitle from "./VideosTitle";
 
 const MainContainer = () => {
-  const movies = useSelector((store) => store.movie?.nowPlaying);
+  const movies = useSelector((store) => store.movie?.popular);
 
   if (!movies) return;
 
