@@ -6,16 +6,14 @@ const SecondaryContainer = () => {
 
   if (Object.keys(movies).length === 0) return;
   return (
-    <>
-      <div className="bg-black">
-        <div className="flex flex-col text-white -mt-56 relative z-50">
-          <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
-          <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
-          <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
-          <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
-        </div>
+    <div className="bg-black">
+      <div className="flex flex-col gap-10 text-white -mt-56 relative z-50 ml-10">
+        <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
+        <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
+        <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
+        <MovieList title="Now Playing" moviesList={movies?.nowPlaying} />
       </div>
-    </>
+    </div>
   );
 };
 
