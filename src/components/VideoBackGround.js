@@ -29,7 +29,10 @@ const VideoBackGround = ({ videoId }) => {
       <iframe
         className="w-screen aspect-video"
         src={
-          "https://www.youtube.com/embed/" + videoKey + "?&autoplay=1&mute=1"
+          "https://www.youtube.com/embed/" +
+          videoKey +
+          "?&autoplay=1&mute=1&loop=1&playlist=" +
+          videoKey
         }
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

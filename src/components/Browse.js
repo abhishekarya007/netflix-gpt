@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import Header from "./Header";
 import options from "../utils/tmdb";
 import { useDispatch } from "react-redux";
-import { addMovies } from "../utils/movieSlice";
+import { addNowPlayingMovies } from "../utils/movieSlice";
 import MainContainer from "./MainContainer";
+import SecondaryContainer from "./SecondaryContainer";
 
 const Browse = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Browse = () => {
       options
     );
     const json = await data.json();
-    dispatch(addMovies(json.results));
+    dispatch(addNowPlayingMovies(json.results));
   };
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const Browse = () => {
     <div>
       <Header />
       <MainContainer />
+      <SecondaryContainer />
     </div>
   );
 };
