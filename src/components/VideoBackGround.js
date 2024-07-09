@@ -12,6 +12,8 @@ const VideoBackGround = ({ videoId }) => {
     const json = await data.json();
     const allVideos = json.results;
 
+    if (allVideos.length === 0) return;
+
     const trailer = allVideos.filter((video) => video.type === "Trailer");
     trailer.length > 0
       ? setVideoKey(trailer[0].key)
