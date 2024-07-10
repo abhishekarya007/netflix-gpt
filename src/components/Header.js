@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { toggleGptSearch } from "../utils/gptSlice";
+import { NETFLIX_LOGO } from "../utils/constants";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
@@ -42,18 +43,14 @@ const Header = () => {
 
   return (
     <div className="flex justify-between absolute bg-gradient-to-b from-black px-8 py-2 z-20 w-screen items-center">
-      <img
-        className="w-48"
-        src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-        alt="netflix-logo"
-      ></img>
+      <img className="w-48" src={NETFLIX_LOGO} alt="netflix-logo"></img>
       {user && (
         <div>
           <span
             onClick={() => dispatch(toggleGptSearch())}
             className="bg-blue-500 h-fit text-white text-sm font-bold p-2 rounded-lg cursor-pointer mr-2"
           >
-            {isGptSearch ? "Gpt Search" : "Home"}
+            {isGptSearch ? "Home" : "Gpt Search"}
           </span>
           <span
             onClick={handleSignOut}
