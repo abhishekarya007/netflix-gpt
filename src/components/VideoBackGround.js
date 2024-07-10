@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import options from "../utils/tmdb";
 
-const VideoBackGround = ({ videoId }) => {
+const VideoBackGround = ({ videoId, isMainScreen = false }) => {
   const [videoKey, setVideoKey] = useState();
 
   const getTrailer = async () => {
@@ -20,6 +20,8 @@ const VideoBackGround = ({ videoId }) => {
       : setVideoKey(allVideos[0].key);
   };
 
+  const mainScreen = isMainScreen ? "&mute=1" : "";
+
   useEffect(() => {
     getTrailer();
   }, []);
@@ -31,12 +33,14 @@ const VideoBackGround = ({ videoId }) => {
         src={
           "https://www.youtube.com/embed/" +
           videoKey +
-          "?&autoplay=1&mute=1&loop=1&playlist=" +
-          videoKey
+          "?&autoplay=1&loop=1&playlist=" +
+          videoKey +
+          mainScreen
         }
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
       ></iframe>
     </div>
   );

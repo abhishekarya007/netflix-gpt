@@ -1,8 +1,9 @@
 import React from "react";
 import Browse from "./Browse";
 import Login from "./Login";
-import { createBrowserRouter, useNavigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
+import PlayTrailer from "./PlayTrailer";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -13,6 +14,10 @@ const Body = () => {
     {
       path: "/browse",
       element: <Browse />,
+    },
+    {
+      path: "/play/:id",
+      element: <PlayTrailer />,
     },
   ]);
   return (

@@ -9,7 +9,11 @@ const MovieList = ({ title, moviesList }) => {
       <div className="flex flex-col gap-4 overflow-scroll mt-8">
         <div className="flex w-max gap-2 overflow-x-scroll">
           {moviesList.map((movie) => (
-            <MovieCards poster={movie?.poster_path} />
+            <MovieCards
+              key={movie?.id}
+              poster={movie?.poster_path}
+              mKey={movie?.id}
+            />
           ))}
         </div>
       </div>
