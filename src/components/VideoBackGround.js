@@ -1,30 +1,9 @@
-import React, { useEffect, useState } from "react";
-import options from "../utils/tmdb";
+import useGetTrailerKey from "../hooks/useGetTrailerKey";
 
 const VideoBackGround = ({ videoId, isMainScreen = false }) => {
-  const [videoKey, setVideoKey] = useState();
-
-  const getTrailer = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/" + videoId + "/videos",
-      options
-    );
-    const json = await data.json();
-    const allVideos = json.results;
-
-    if (allVideos.length === 0) return;
-
-    const trailer = allVideos.filter((video) => video.type === "Trailer");
-    trailer.length > 0
-      ? setVideoKey(trailer[0].key)
-      : setVideoKey(allVideos[0].key);
-  };
-
   const mainScreen = isMainScreen ? "&mute=1" : "";
 
-  useEffect(() => {
-    getTrailer();
-  }, []);
+  const videoKey = useGetTrailerKey(videoId);
 
   return (
     <div>

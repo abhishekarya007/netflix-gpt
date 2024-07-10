@@ -4,11 +4,11 @@ import {
   addPopularMovies,
   addTopRatesMovies,
   addUpcomingMovies,
-} from "./movieSlice";
+} from "../utils/movieSlice";
 import { useEffect } from "react";
-import options from "./tmdb";
+import options from "../utils/tmdb";
 
-const useGetMovies = () => {
+const useSetMovies = () => {
   const dispatch = useDispatch();
 
   const getPopularList = async () => {
@@ -56,4 +56,4 @@ const useGetMovies = () => {
   }, []);
 };
 
-export default useGetMovies;
+export default useSetMovies;

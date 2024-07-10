@@ -1,12 +1,12 @@
 import Header from "./Header";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
-import useGetMovies from "../utils/useGetMovies";
 import GptContainer from "./GptContainer";
 import { useSelector } from "react-redux";
+import useSetMovies from "../hooks/useSetMovies";
 
 const Browse = () => {
-  useGetMovies();
+  useSetMovies();
   const isGptSearch = useSelector((store) => store.gpt.isGptSearch);
 
   return (
