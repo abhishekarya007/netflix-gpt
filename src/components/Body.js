@@ -16,7 +16,7 @@ const Body = () => {
       element: <Browse />,
     },
     {
-      path: "/play/:id",
+      path: "/browse/:id",
       element: <PlayTrailer />,
     },
   ]);

@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const VideosTitle = ({ title, overview }) => {
+const VideosTitle = ({ title, overview, id }) => {
+  const navigate = useNavigate();
   return (
     <div className="absolute w-screen aspect-video bg-gradient-to-r from-black">
       <div className="mt-[20%] ml-10 w-96">
@@ -8,7 +10,10 @@ const VideosTitle = ({ title, overview }) => {
         <div className="text-xs px-2 pt-2 pb-4">{overview}</div>
       </div>
       <div className="flex gap-4 mx-12 text-sm">
-        <button className="px-8 py-3 text-black bg-white rounded-lg">
+        <button
+          onClick={() => navigate("/browse/" + id)}
+          className="px-8 py-3 text-black bg-white rounded-lg"
+        >
           {" "}
           ▶ Play
         </button>

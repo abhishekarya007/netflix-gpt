@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 src/utils/tmdb.js
+src/utils/keys.js
 # testing
 /coverage
 
