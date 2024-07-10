@@ -4,9 +4,11 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { toggleGptSearch } from "../utils/gptSlice";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
+  const isGptSearch = useSelector((store) => store.gpt.isGptSearch);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSignOut = () => {
@@ -46,11 +48,19 @@ const Header = () => {
         alt="netflix-logo"
       ></img>
       {user && (
-        <div
-          onClick={handleSignOut}
-          className="bg-red-600 h-fit text-white text-sm font-bold p-2 rounded-lg cursor-pointer"
-        >
-          Sign Out
+        <div>
+          <span
+            onClick={() => dispatch(toggleGptSearch())}
+            className="bg-blue-500 h-fit text-white text-sm font-bold p-2 rounded-lg cursor-pointer mr-2"
+          >
+            {isGptSearch ? "Gpt Search" : "Home"}
+          </span>
+          <span
+            onClick={handleSignOut}
+            className="bg-red-600 h-fit text-white text-sm font-bold p-2 rounded-lg cursor-pointer"
+          >
+            Sign Out
+          </span>
         </div>
       )}
     </div>
